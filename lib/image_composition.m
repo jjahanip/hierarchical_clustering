@@ -34,6 +34,24 @@ elseif strcmp(dataset , 'sham')
     image_names{13} = 'ARBc_#29_Sham_1C_4113_C4_IlluminationCorrected_stitched_registered.tif';
     image_names{14} = 'ARBc_#29_Sham_1C_4113_C6_IlluminationCorrected_stitched_registered.tif';
     image_names{15} = 'ARBc_#29_Sham_1C_4113_C8_IlluminationCorrected_stitched_registered.tif';
+elseif strcmp(dataset , 'vehicle')
+    % read the images
+    image_names{1}  = 'ARBc_FPI#6_Vehicle_20C_4110_C10_IlluminationCorrected_stitched.tif';
+    image_names{2}  = 'ARBc_FPI#6_Vehicle_20C_4110_C4_IlluminationCorrected_stitched.tif';
+    image_names{3}  = 'ARBc_FPI#6_Vehicle_20C_4110_C5_IlluminationCorrected_stitched.tif';
+    image_names{4}  = 'ARBc_FPI#6_Vehicle_20C_4110_C6_IlluminationCorrected_stitched.tif';
+    image_names{5}  = 'ARBc_FPI#6_Vehicle_20C_4110_C7_IlluminationCorrected_stitched.tif';
+    image_names{6}  = 'ARBc_FPI#6_Vehicle_20C_4110_C8_IlluminationCorrected_stitched.tif';
+    image_names{7}  = 'ARBc_FPI#6_Vehicle_20C_4110_C1_IlluminationCorrected_stitched.tif';
+    image_names{8}  = 'ARBc_FPI#6_Vehicle_20C_4110_C2_IlluminationCorrected_stitched.tif';
+    image_names{9}  = 'ARBc_FPI#6_Vehicle_20C_4111_C2_IlluminationCorrected_stitched_registered.tif';
+    image_names{10} = 'ARBc_FPI#6_Vehicle_20C_4111_C5_IlluminationCorrected_stitched_registered.tif';
+    image_names{11} = 'ARBc_FPI#6_Vehicle_20C_4111_C8_IlluminationCorrected_stitched_registered.tif';
+    image_names{12} = 'ARBc_FPI#6_Vehicle_20C_4112_C5_IlluminationCorrected_stitched_registered.tif';
+    image_names{13} = 'ARBc_FPI#6_Vehicle_20C_4113_C4_IlluminationCorrected_stitched_registered.tif';
+    image_names{14} = 'ARBc_FPI#6_Vehicle_20C_4113_C6_IlluminationCorrected_stitched_registered.tif';
+    image_names{15} = 'ARBc_FPI#6_Vehicle_20C_4113_C8_IlluminationCorrected_stitched_registered.tif';
+    
 end
 
 ch = get_channels(dataset);                                                 % get the channel names and color codes
