@@ -1,7 +1,7 @@
 % ADDED:
 %   composition of images (several channels)
 
-function  dendrogram_vis_V5( dataset , hcluster , maxclust, opt )
+function  dendrogram_vis( dataset , hcluster , maxclust, opt )
 % maxclust = 3;
 
 %% checking the inputs
@@ -105,7 +105,7 @@ cl_map_clust = handles.cl_map_clust;
 plot_type = handles.plot_type;
 
 if isfield(handles,'points_handle')
-    delete(handles.points_handle);
+    cellfun(@delete, handles.points_handle, 'UniformOutput', 0);
     legend off
 end
 
@@ -116,17 +116,21 @@ for i = 1: size(cellData.SelectedRows,1)
     ind = tree == culsterNo;                                                % find the indices of that cluster
     % plot by cluster number
     if strcmp (plot_type , 'text')
-        points_handle(i) = text( dataset.centers(ind,1), ...
-            dataset.centers(ind,2), ...
-            num2str(culsterNo), ...
-            'color', cl_map_clust(culsterNo,:), ...
-            'FontSize',15);
+        points_handle{i} = text( ...
+                                 dataset.centers(ind,1), ...
+                                 dataset.centers(ind,2), ...
+                                 num2str(culsterNo), ...
+                                 'color', cl_map_clust(culsterNo,:), ...
+                                 'FontSize',20...
+                                );
     % plot by dot
     elseif strcmp(plot_type , 'dot')
-        points_handle(i) = plot(dataset.centers(ind,1), ...                                    
-            dataset.centers(ind,2), ...
-            '.' , 'color' , cl_map_clust(culsterNo,:),...
-            'markersize' , 15);
+        points_handle{i} = plot(....
+                                dataset.centers(ind,1), ...                                    
+                                dataset.centers(ind,2), ...
+                                '.', ...
+                                'color', cl_map_clust(culsterNo,:),...
+                                'markersize' , 15);
     end
     legendCell(i,1) = cellstr(num2str(culsterNo', 'cluster %-d'));          % get the cluster number for the legend
 end
@@ -186,8 +190,7 @@ set(gcf,'CurrentAxes',handles.dendrogram)                                   % se
 
 % setting colormap information
 cl_map_clust = hsv (maxclust);                                              % create a color map based on different clusters
-cl_map_clust = hsv (maxclust+5);                                            % create a color map based on different clusters
-% rng(0);                                                                     % set the seed for the random
+rng(0);                                                                     % set the seed for the random
 cl_map_clust = cl_map_clust(randperm(size(cl_map_clust,1)),:);              % shuffle the colors to have random colors
 
 
@@ -221,7 +224,7 @@ set(hJTable, 'MousePressedCallback', @cellSelection_callback);
 % remove the points from the previous visualization
 if isfield(handles,'points_handle')
     set(gcf,'CurrentAxes',handles.clusterPlot_hanlde)                       % set current axis to the cluster plot
-    delete(handles.points_handle);
+    cellfun(@delete, handles.points_handle, 'UniformOutput', 0);
     legend off
 end
 
