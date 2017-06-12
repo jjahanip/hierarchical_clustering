@@ -134,7 +134,9 @@ for i = 1: size(cellData.SelectedRows,1)
     end
     legendCell(i,1) = cellstr(num2str(culsterNo', 'cluster %-d'));          % get the cluster number for the legend
 end
-legend (legendCell)                                                         % print the legend
+if strcmp(plot_type , 'dot')
+    legend (legendCell)                                                     % print the legend
+end
 hold off;                                                                   % so that the legend does not show previous colors
 
 
