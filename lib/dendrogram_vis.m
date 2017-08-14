@@ -75,6 +75,16 @@ for m = 7: size(images, 1)
         'Position',[0.01+(m-7)/20 .12 .05 .02],...
         'Callback', @biomarker_Callback);
 end
+%% create a text and go button to import the selected clusters indices
+uicontrol('style', 'text',...
+          'Units', 'normalized',...
+          'Position', [.52 .84 .08 .01],...
+          'String','import the indices of the selected cluster');
+uicontrol('style', 'pushbutton',...
+          'Units', 'normalized',...
+          'Position', [.52 .82 .02 .02],...
+          'String','import',...
+          'Callback',@import_Callback);
 %% save handles
 handles.fig = guihandles(figure_handle);
 handles.dendrogram = dend_handle;
@@ -234,6 +244,18 @@ handles.T = T;
 handles.cl_map_clust = cl_map_clust;
 handles.table_handle = table_handle;
 guidata(hObject,handles)
+end
+%--------------------------------------------------------------------------
+function import_Callback(hObject,~)
+% extract the needed information
+handles = guidata(hObject);
+cellData = handles.cellData;
+tree = handles.T;
+
+culsterNo = cellData.SelectedRows+1;                                        % get the number of selected clusters 
+ind = ismember(tree, culsterNo);                                            % set True for the selected clusters
+assignin('base', 'indices', ind);                                           % import the indices to the base workspace
+    
 end
 
 
