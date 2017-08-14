@@ -66,4 +66,11 @@ elseif strcmp(dataset, 'vehicle')
         'GLAST'       ,'ARBc_FPI#6_Vehicle_20C_4113_C6_IlluminationCorrected_stitched_registered.tif', [1 0 0];
         'MBP'         ,'ARBc_FPI#6_Vehicle_20C_4113_C7_IlluminationCorrected_stitched_registered.tif', [1 0 .5];
         'TomatoLectin','ARBc_FPI#6_Vehicle_20C_4113_C8_IlluminationCorrected_stitched_registered.tif', [1 0 1];};
+elseif strcmp(dataset, 'xiaoyang_crops')
+    ch = {...
+        'DAPI'        ,'DAPI.tif'       , [1 1 1];
+        'Histone'     ,'Histone.tif'    , [1 0 0];
+        'NeuN'        ,'NeuN.tif'       , [1 .5 0];
+        'Parvalbumin' ,'Parv.tif'       , [0 1 1];
+        'Glut'        ,'Glut.tif'       , [1 0 1];};
 end

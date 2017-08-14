@@ -51,7 +51,13 @@ elseif strcmp(dataset , 'vehicle')
     image_names{13} = 'ARBc_FPI#6_Vehicle_20C_4113_C4_IlluminationCorrected_stitched_registered.tif';
     image_names{14} = 'ARBc_FPI#6_Vehicle_20C_4113_C6_IlluminationCorrected_stitched_registered.tif';
     image_names{15} = 'ARBc_FPI#6_Vehicle_20C_4113_C8_IlluminationCorrected_stitched_registered.tif';
-    
+elseif strcmp(dataset , 'xiaoyang_crops')
+    % read the images
+    image_names{1}  ='DAPI.tif';
+    image_names{2}  ='Histone.tif';
+    image_names{3}  ='NeuN.tif';
+    image_names{4}  ='Parv.tif';
+    image_names{5}  ='Glut.tif';
 end
 
 ch = get_channels(dataset);                                                 % get the channel names and color codes
@@ -61,7 +67,7 @@ for i = 1:length(image_names)
     image{i,1} = ch{ismember(ch(:,2),image_names{i}),1};                    % first elemet = channel name
     %     im = imread(image_names{i});                                            % read the image
     %     im = imadjust(im);                                                      % adjust the histogram of the image for better visualization
-    %     im = double(im)./2^16;                                                   % cast to double and normalize between 0 and 1
+    %     im = double(im)./2^16;                                                  % cast to double and normalize between 0 and 1
     %     image{i,2} = im;                                                        % second element = image of the channel
     if i<=6                                                                 % just for the cell type read the image
         image{i,2} = imadjust(imread(image_names{i}));                      % second element = image of the channel
