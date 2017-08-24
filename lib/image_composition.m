@@ -70,7 +70,7 @@ for i = 1:length(image_names)
     %     im = double(im)./2^16;                                                  % cast to double and normalize between 0 and 1
     %     image{i,2} = im;                                                        % second element = image of the channel
     if i<=6                                                                 % just for the cell type read the image
-        image{i,2} = imadjust(imread(image_names{i}));                      % second element = image of the channel
+        image{i,2} = imadjust(double(imread(image_names{i}))./2^16);        % second element = image of the channel
         chColor = cell2mat( ch(ismember(ch(:,2),image_names{i}),3) );       % get the color code of the channel
         image{i,3} = cat(3, ...                                             % third element = color of the channel
             chColor(1) * ones(imSize),...
