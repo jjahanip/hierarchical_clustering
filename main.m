@@ -5,15 +5,15 @@ clc; clear ;
 setPath();
 %% parameters
 maxclust = 20;
-cell_type = 'astrocyte';
-cell_class = 'pos';
+cell_type = 'costum';
+cell_class = 'all';
 %% load data
 if strcmp(cell_type, 'costum')
     main_biomarker = 'S100';
     load LiVPA_S100_multi_3.mat         ; new_db{1} = db{1};
-    load LiVPA_APC_multi_3.mat          ; new_db{2} = db{1};
-    load LiVPA_GFAP_multi_3.mat         ; new_db{3} = db{3};
-    load LiVPA_GLAST_multi_3.mat        ; new_db{4} = db{3};
+%     load LiVPA_APC_multi_3.mat          ; new_db{2} = db{1};
+%     load LiVPA_GFAP_multi_3.mat         ; new_db{3} = db{3};
+%     load LiVPA_GLAST_multi_3.mat        ; new_db{4} = db{3};
 elseif strcmp(cell_type, 'neuron')
     main_biomarker = 'NeuN';
     load LiVPA_NeuN_multi_3.mat         ; new_db{1} = db{1};
@@ -53,6 +53,7 @@ biomarkers_title_name = sprintf('using %s features', strjoin(biomarkers, ' / '))
 type = 'vert';
 dataset = concatenate( new_db, type );
 dataset.features = dataset.features./max(dataset.features(:));              % normalize the deep features to [0,1]
+dataset.biomarkers = biomarkers;
 
 % remove the outliers for more acurate clustering
 % img = imread('ARBc_#4_Li+VPA_37C_4110_C6_IlluminationCorrected_stitched.tif');

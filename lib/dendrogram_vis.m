@@ -1,10 +1,7 @@
-% ADDED:
-%   composition of images (several channels)
-
 function  dendrogram_vis( dataset , hcluster , maxclust, opt )
-% maxclust = 3;
+%% GUI construction
 
-%% checking the inputs
+% checking the inputs
 if nargin < 3
     fprintf ('Not enough input arguments\n')
     return
@@ -15,10 +12,10 @@ elseif nargin == 4
     plot_type = opt.plot_type;
     title_name = opt.title_name;
 end
-%% loading the inputs
+% loading the inputs
 images = image_composition(dataset.name);
 
-%% plotting the figures
+% plotting the figures
 figure_handle = figure('Tag', 'main_figure');
 
 
@@ -42,7 +39,7 @@ dend_handle = subplot(122,...
                       'Position',[.51 0.03 .496 .917]);
 [~ , T] = dendrogram(hcluster.links , maxclust);                            % plot the dendrogram      
 
-%% create a text and go button to change the number of clusters
+% create a text and go button to change the number of clusters
 uicontrol('style', 'text',...
           'Units', 'normalized',...
           'Position', [.52 .9 .06 .01],...
@@ -56,7 +53,7 @@ uicontrol('style', 'pushbutton',...
           'Position', [.56 .88 .02 .02],...
           'String','go',...
           'Callback',@go_Callback)
-%% create pushbotton user interfaces for the channel visualizations
+% create pushbotton user interfaces for the channel visualizations
 for m = 1: 6
     uicontrol(figure_handle,'Style', 'checkbox',...
         'String', images{m,1},...
@@ -75,7 +72,7 @@ for m = 7: size(images, 1)
         'Position',[0.01+(m-7)/20 .12 .05 .02],...
         'Callback', @biomarker_Callback);
 end
-%% create a text and go button to import the selected clusters indices
+% create a text and go button to import the selected clusters indices
 uicontrol('style', 'text',...
           'Units', 'normalized',...
           'Position', [.52 .84 .08 .01],...
@@ -85,7 +82,13 @@ uicontrol('style', 'pushbutton',...
           'Position', [.52 .82 .02 .02],...
           'String','import',...
           'Callback',@import_Callback);
-%% save handles
+% create push button for classification      
+uicontrol('style', 'pushbutton',...
+          'Units', 'normalized',...
+          'Position', [.52 .77 .02 .02],...
+          'String','classify',...
+          'Callback',@classify_Callback);
+% save handles
 handles.fig = guihandles(figure_handle);
 handles.dendrogram = dend_handle;
 handles.clusterPlot_hanlde = clusterPlot_hanlde;
@@ -99,12 +102,7 @@ handles.title_name = title_name;
 guidata(figure_handle,handles)
 end
 
-
-
-
-
-
-%--------------------------------------------------------------------------
+%% ------------------------------------------------------------------------
 function cellSelection_callback(cellData, ~)
 pause(0.5)
 
@@ -153,9 +151,8 @@ hold off;                                                                   % so
 handles.points_handle = points_handle;
 handles.cellData = cellData;
 guidata(gcf,handles)
-
 end
-%--------------------------------------------------------------------------
+%% ------------------------------------------------------------------------
 function biomarker_Callback(hObject,~)
 pause(0.5)
 
@@ -192,7 +189,7 @@ if isfield(handles,'cellData')
     cellSelection_callback(handles.cellData);
 end
 end
-%--------------------------------------------------------------------------
+%% ------------------------------------------------------------------------
 function go_Callback(hObject,~)
 handles = guidata(hObject);
 maxclust = str2double( handles.fig.num_clusters.String );                   % get the number from editor ui
@@ -245,17 +242,40 @@ handles.cl_map_clust = cl_map_clust;
 handles.table_handle = table_handle;
 guidata(hObject,handles)
 end
-%--------------------------------------------------------------------------
+%% ------------------------------------------------------------------------
 function import_Callback(hObject,~)
 % extract the needed information
 handles = guidata(hObject);
 cellData = handles.cellData;
 tree = handles.T;
 
-culsterNo = cellData.SelectedRows+1;                                        % get the number of selected clusters 
-ind = ismember(tree, culsterNo);                                            % set True for the selected clusters
+clusterNo = cellData.SelectedRows+1;                                        % get the number of selected clusters 
+ind = ismember(tree, clusterNo);                                            % set True for the selected clusters
 assignin('base', 'indices', ind);                                           % import the indices to the base workspace
     
 end
 
+%% ------------------------------------------------------------------------
+function classify_Callback(hObject, ~)
 
+handles = guidata(hObject);
+cellData = handles.cellData;
+dataset = handles.dataset;
+tree = handles.T;
+if max(tree)>2
+    fprintf('Just for binary classification!\n');
+    return
+end
+
+%binary classification
+clusterNo = cellData.SelectedRows+1;                                        % find the cluster number of the selected cell
+if length(clusterNo)>1
+    fprintf('More than one cluster is selected for binary classification!\n');
+    return
+end
+ind = ismember(tree, clusterNo);                                            % extract the indices from the tree
+selected_cells = dataset.centers(ind, :);                                   % find corresponding cells from the centers
+pred = ismember(dataset.centers, selected_cells, 'rows');                   % predicted class 
+figure;
+confusionMatrix3d(dataset.labels, full(pred), dataset.biomarkers{1});
+end
