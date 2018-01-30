@@ -15,3 +15,4 @@ addpath(genpath([basepath, '\lib']));
 addpath(genpath([basepath, '\input']));
 addpath(genpath([basepath, '\results']));
 addpath(genpath([images_path , '\crops_for_badri_proposal']));
+addpath(genpath([images_path , '\xiaoyang']));

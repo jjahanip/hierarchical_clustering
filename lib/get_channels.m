@@ -13,7 +13,7 @@ if strcmp(dataset, 'LiVPa')
         'TubulinBeta3','ARBc_#4_Li+VPA_37C_4111_C1_IlluminationCorrected_stitched_registered.tif'   , [1 0 .5];
         'MAP2'        ,'ARBc_#4_Li+VPA_37C_4111_C2_IlluminationCorrected_stitched_registered.tif'   , [1 0 1];
         'PLP'         ,'ARBc_#4_Li+VPA_37C_4111_C5_IlluminationCorrected_stitched_registered.tif'   , [.5 0 1];
-        'GFAP'        ,'ARBc_#4_Li+VPA_37C_4111_C8_IlluminationCorrected_stitched_registered.tif'   , [0 0 1];
+        'GFAP'        ,'ARBc_#4_Li+VPA_37C_4111_C8_IlluminationCorrected_stitched_registered.tif'   , [0 .6 1];
         'PCNA'        ,'ARBc_#4_Li+VPA_37C_4112_C5_IlluminationCorrected_stitched_registered.tif'   , [0 1 1];
         'CC3'         ,'ARBc_#4_Li+VPA_37C_4112_C6_IlluminationCorrected_stitched_registered.tif'   , [0 1 .5];
         'NFH'         ,'ARBc_#4_Li+VPA_37C_4112_C7_IlluminationCorrected_stitched_registered.tif'   , [0 1 0];
@@ -35,7 +35,7 @@ elseif strcmp(dataset, 'sham')
         'TubulinBeta3','ARBc_#29_Sham_1C_4111_C1_IlluminationCorrected_stitched_registered.tif'     , [1 0 .5];
         'MAP2'        ,'ARBc_#29_Sham_1C_4111_C2_IlluminationCorrected_stitched_registered.tif'     , [1 0 1];
         'PLP'         ,'ARBc_#29_Sham_1C_4111_C5_IlluminationCorrected_stitched_registered.tif'     , [.5 0 1];
-        'GFAP'        ,'ARBc_#29_Sham_1C_4111_C8_IlluminationCorrected_stitched_registered.tif'     , [0 0 1];
+        'GFAP'        ,'ARBc_#29_Sham_1C_4111_C8_IlluminationCorrected_stitched_registered.tif'     , [0 1 1];
         'PCNA'        ,'ARBc_#29_Sham_1C_4112_C5_IlluminationCorrected_stitched_registered.tif'     , [0 1 1];
         'CC3'         ,'ARBc_#29_Sham_1C_4112_C6_IlluminationCorrected_stitched_registered.tif'     , [0 1 .5];
         'NFH'         ,'ARBc_#29_Sham_1C_4112_C7_IlluminationCorrected_stitched_registered.tif'     , [0 1 0];
@@ -57,7 +57,7 @@ elseif strcmp(dataset, 'vehicle')
         'TubulinBeta3','ARBc_FPI#6_Vehicle_20C_4111_C1_IlluminationCorrected_stitched_registered.tif', [1 0 .5];
         'MAP2'        ,'ARBc_FPI#6_Vehicle_20C_4111_C2_IlluminationCorrected_stitched_registered.tif', [1 0 1];
         'PLP'         ,'ARBc_FPI#6_Vehicle_20C_4111_C5_IlluminationCorrected_stitched_registered.tif', [.5 0 1];
-        'GFAP'        ,'ARBc_FPI#6_Vehicle_20C_4111_C8_IlluminationCorrected_stitched_registered.tif', [0 0 1];
+        'GFAP'        ,'ARBc_FPI#6_Vehicle_20C_4111_C8_IlluminationCorrected_stitched_registered.tif', [0 1 1];
         'PCNA'        ,'ARBc_FPI#6_Vehicle_20C_4112_C5_IlluminationCorrected_stitched_registered.tif', [0 1 1];
         'CC3'         ,'ARBc_FPI#6_Vehicle_20C_4112_C6_IlluminationCorrected_stitched_registered.tif', [0 1 .5];
         'NFH'         ,'ARBc_FPI#6_Vehicle_20C_4112_C7_IlluminationCorrected_stitched_registered.tif', [0 1 0];

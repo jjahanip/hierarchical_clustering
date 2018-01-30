@@ -173,6 +173,7 @@ for m = 1:size(images,1)
             imSize = size(images{1,2});                                     % get the size of the image
             image_name = ch{ismember(ch(:,1),images{m,1}),2};
             images{m,2} = imadjust(double(imread(image_name))./2^16);      % second element = image of the channel
+            
             chColor = cell2mat( ch(ismember(ch(:,1),images{m,1}),3) );      % get the color code of the channel
             images{m,3} = cat(3, ...                                        % third element = color of the channel
                 chColor(1) * ones(imSize),...
@@ -204,9 +205,6 @@ set(gcf,'CurrentAxes',handles.dendrogram)                                   % se
 cl_map_clust = hsv (maxclust);                                              % create a color map based on different clusters
 rng(0);                                                                     % set the seed for the random
 cl_map_clust = cl_map_clust(randperm(size(cl_map_clust,1)),:);              % shuffle the colors to have random colors
-cl_map_clust(1,:) = [1 1 0];
-cl_map_clust(2,:) = [0 1 0];
-cl_map_clust(3,:) = [1 0 0];
 
 % get the number of samples in each cluster
 for i = 1: maxclust
